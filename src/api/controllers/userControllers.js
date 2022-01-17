@@ -19,7 +19,7 @@ const userLoginController = async (request, resolve, next) => {
     const token = await userLogin(email, password);
     return resolve.status(success).json(token);
   } catch (error) {
-    console.log('DELETE USER: ', error);
+    console.log('LOGIN USER: ', error);
     return next(error);
   }
 };
