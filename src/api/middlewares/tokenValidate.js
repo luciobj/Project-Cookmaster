@@ -6,7 +6,6 @@ const errorConstructor = require('../utils/functions/errorConstructor');
 
 const tokenValidate = async (request, _resolve, next) => {
   const token = request.headers.authorization;
-  console.log(token);
   try {
     const { data } = jwt.verify(token, key);
     const { email } = data;
