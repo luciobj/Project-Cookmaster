@@ -9,11 +9,8 @@ const tokenValidate = async (request, _resolve, next) => {
   console.log(token);
   try {
     const { data } = jwt.verify(token, key);
-    console.log(data);
     const { email } = data;
-    console.log(email);
     const user = await findUserByEmail(email);
-    console.log(user);
     if (!user) {
       console.log('TOKEN VALIDATION: user not found');
       throw errorConstructor(badRequest, 'jwt malformed');

@@ -15,7 +15,7 @@ const recipeCreateController = async (request, resolve, next) => {
   }
 };
 
-const recipesListController = async (request, resolve, next) => {
+const recipesListController = async (_request, resolve, next) => {
   try {
     const recipeList = await recipesList();
     return resolve.status(success).json(recipeList);
