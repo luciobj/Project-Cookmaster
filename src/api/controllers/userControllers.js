@@ -17,6 +17,7 @@ const userLoginController = async (request, resolve, next) => {
   try {
     const { email, password } = request.body;
     const token = await userLogin(email, password);
+    request.headers.authorization = token;
     return resolve.status(success).json(token);
   } catch (error) {
     console.log('LOGIN USER: ', error);

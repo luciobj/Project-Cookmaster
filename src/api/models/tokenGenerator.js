@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'cookmastertoken';
+const key = 'cookmastertoken';
 
 const jwtConfig = {
   expiresIn: '7d',
@@ -8,9 +8,12 @@ const jwtConfig = {
 };
 
 const tokenGenerator = (user) => {
-  const token = jwt.sign({ data: user }, secret, jwtConfig);
+  const token = jwt.sign({ data: user }, key, jwtConfig);
   
   return token;
 };
 
-module.exports = tokenGenerator;
+module.exports = {
+  key,
+  tokenGenerator,
+};
