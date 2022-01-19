@@ -1,9 +1,9 @@
 const { ObjectId } = require('mongodb');
 const errorConstructor = require('../utils/functions/errorConstructor');
 
-const idValidate = (id, status, code, message) => {
+const idValidate = (id, status, message) => {
   if (!ObjectId.isValid(id)) {
-    throw errorConstructor(status, code, message);
+    throw errorConstructor(status, message);
   }
   return true;
 };

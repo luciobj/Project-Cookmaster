@@ -3,6 +3,7 @@ const recipesList = require('../services/recipes/recipesList');
 const recipeById = require('../services/recipes/recipeById');
 const recipeUpdate = require('../services/recipes/recipeUpdate');
 const recipeDelete = require('../services/recipes/recipeDelete');
+const recipeImage = require('../services/recipes/recipeImage');
 const { created, success, noContent } = require('../utils/dictionary/statusCode');
 
 const recipeCreateController = async (request, resolve, next) => {
@@ -61,10 +62,24 @@ const recipeDeleteController = async (request, resolve, next) => {
   }
 };
 
+const imageAddController = async (request, resolve, next) => {
+  try {
+    const { id } = request.params;
+    const { file } = request;
+    const imagePath = `localhost:3000/${file.path}`;
+    const newRecipe = await recipeImage(id, imagePath);
+    return resolve.status(success).json(newRecipe);
+  } catch (error) {
+    console.log('POST RECIPE IMAGE: ', error);
+    return next(error);
+  }
+};
+
 module.exports = {
   recipeCreateController,
   recipesListController,
   getRecipeByIdController,
   updateRecipeController,
   recipeDeleteController,
+  imageAddController,
 };

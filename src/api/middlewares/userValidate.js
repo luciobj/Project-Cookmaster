@@ -13,8 +13,8 @@ const userValidate = async (request, _resolve, next) => {
     const { email } = data;
     const { _id: userFoundId, role } = await findUserByEmail(email);
     const recipe = await findRecipeById(id);
-    if (userFoundId === recipe.userId || role === 'admin') {
-      next();
+    if (String(userFoundId) === String(recipe.userId) || role === 'admin') {
+      return next();
     }
     next(errorConstructor(unauthorized, 'not recipe creator or admin'));
   } catch (error) {
