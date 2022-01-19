@@ -2,6 +2,7 @@ const express = require('express');
 const {
   userCreateController,
   userLoginController,
+  adminCreateController,
 } = require('../controllers/userControllers');
 const tokenValidate = require('../middlewares/tokenValidate');
 const userValidate = require('../middlewares/userValidate');
@@ -15,6 +16,7 @@ const {
   getRecipeImageByIdController,
 } = require('../controllers/recipesController');
 const upload = require('../middlewares/multerMiddleware');
+const adminValidate = require('../middlewares/adminValidate');
 
 const router = express.Router();
 
@@ -28,5 +30,6 @@ router.delete('/recipes/:id', tokenValidate, userValidate, recipeDeleteControlle
 router.put('/recipes/:id/image/', tokenValidate, userValidate,
   upload.single('image'), imageAddController);
 router.get('/images/:id.jpeg', getRecipeImageByIdController);
+router.post('/users/admin', adminValidate, adminCreateController);
 
 module.exports = router;
