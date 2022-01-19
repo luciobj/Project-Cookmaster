@@ -5,7 +5,7 @@ const findUserByEmail = require('../models/users/findUserByEmail');
 const { unauthorized } = require('../utils/dictionary/statusCode');
 const errorConstructor = require('../utils/functions/errorConstructor');
 
-const tokenValidate = async (request, _resolve, next) => {
+const userValidate = async (request, _resolve, next) => {
   const token = request.headers.authorization;
   const { id } = request.params;
   try {
@@ -18,9 +18,9 @@ const tokenValidate = async (request, _resolve, next) => {
     }
     next(errorConstructor(unauthorized, 'not recipe creator or admin'));
   } catch (error) {
-    console.log('TOKEN VALIDATION: ', error);
+    console.log('USER VALIDATION: ', error);
     next(errorConstructor(unauthorized, 'jwt malformed'));
   }
 };
 
-module.exports = tokenValidate;
+module.exports = userValidate;

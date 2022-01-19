@@ -2,7 +2,8 @@ const recipeCreate = require('../services/recipes/recipeCreate');
 const recipesList = require('../services/recipes/recipesList');
 const recipeById = require('../services/recipes/recipeById');
 const recipeUpdate = require('../services/recipes/recipeUpdate');
-const { created, success } = require('../utils/dictionary/statusCode');
+const recipeDelete = require('../services/recipes/recipeDelete');
+const { created, success, noContent } = require('../utils/dictionary/statusCode');
 
 const recipeCreateController = async (request, resolve, next) => {
   try {
@@ -49,9 +50,21 @@ const updateRecipeController = async (request, resolve, next) => {
   }
 };
 
+const recipeDeleteController = async (request, resolve, next) => {
+  try {
+    const { id } = request.params;
+    await recipeDelete(id);
+    return resolve.status(noContent).json();
+  } catch (error) {
+    console.log('DELETE RECIPE: ', error);
+    return next(error);
+  }
+};
+
 module.exports = {
   recipeCreateController,
   recipesListController,
   getRecipeByIdController,
   updateRecipeController,
+  recipeDeleteController,
 };
