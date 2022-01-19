@@ -12,6 +12,7 @@ const {
   updateRecipeController,
   recipeDeleteController,
   imageAddController,
+  getRecipeImageByIdController,
 } = require('../controllers/recipesController');
 const upload = require('../middlewares/multerMiddleware');
 
@@ -26,5 +27,6 @@ router.put('/recipes/:id', tokenValidate, userValidate, updateRecipeController);
 router.delete('/recipes/:id', tokenValidate, userValidate, recipeDeleteController);
 router.put('/recipes/:id/image/', tokenValidate, userValidate,
   upload.single('image'), imageAddController);
+router.get('/images/:id.jpeg', getRecipeImageByIdController);
 
 module.exports = router;

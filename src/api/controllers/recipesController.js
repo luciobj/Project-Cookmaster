@@ -1,3 +1,4 @@
+const path = require('path');
 const recipeCreate = require('../services/recipes/recipeCreate');
 const recipesList = require('../services/recipes/recipesList');
 const recipeById = require('../services/recipes/recipeById');
@@ -75,6 +76,17 @@ const imageAddController = async (request, resolve, next) => {
   }
 };
 
+const getRecipeImageByIdController = async (request, resolve, next) => {
+  try {
+    const { id } = request.params;
+    const selectedImage = path.resolve(__dirname, '..', '..', 'uploads', `./${id}.jpeg`);
+    return resolve.status(success).sendFile(selectedImage);
+  } catch (error) {
+    console.log('GET RECIPE IMAGE BY ID: ', error);
+    return next(error);
+  }
+};
+
 module.exports = {
   recipeCreateController,
   recipesListController,
@@ -82,4 +94,5 @@ module.exports = {
   updateRecipeController,
   recipeDeleteController,
   imageAddController,
+  getRecipeImageByIdController,
 };
