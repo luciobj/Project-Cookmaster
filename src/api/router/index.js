@@ -8,6 +8,7 @@ const {
   recipeCreateController,
   recipesListController,
   getRecipeByIdController,
+  updateRecipeController,
 } = require('../controllers/recipesController');
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.post('/login', userLoginController);
 router.post('/recipes', tokenValidate, recipeCreateController);
 router.get('/recipes', recipesListController);
 router.get('/recipes/:id', getRecipeByIdController);
+router.put('/recipes/:id', tokenValidate, updateRecipeController);
 
 module.exports = router;
