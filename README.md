@@ -34,4 +34,4 @@ In this project the tecnologies used were NPM, MongoDB and MongoAggregations and
 
 This is a screenshot of the last run of the Trybe evaluator, which scores the demands of the project.
 
-![Evaluator Results 1](./evaluator-results.png)
+![Evaluator Results](./public/evaluator-results.png)
